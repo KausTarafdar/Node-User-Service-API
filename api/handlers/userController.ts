@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { UserRepository } from "../service/userService";
 import { searchUserSchema } from "../validators";
+import { logger } from "../utils/logger";
 
 const userRepository = new UserRepository()
 
@@ -48,10 +49,10 @@ export const searchUser = async (req: Request, res: Response) => {
     }
 
   } catch (error) {
-      console.error("Error searching user:", error);
-      res.status(500).json({
-          success: false,
-          message: "Internal server error"
-      });
+    logger.error(error)
+    res.status(500).json({
+        success: false,
+        message: "Internal server error"
+    });
   }
 };

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { UserRepository } from "../service/userService";
 import { IUser } from "../models/User";
 import { loginSchema, registerSchema } from "../validators";
+import { logger } from "../utils/logger";
 
 const userRepository = new UserRepository()
 
@@ -58,7 +59,7 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 
   } catch (error) {
-    console.log(error)
+    logger.error(error)
     res.status(500).json({
       success: false,
       message: "Internal server error",

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 
-import { IUserData, UserRepository } from "../service/userService";
+import { UserRepository } from "../service/userService";
+import { logger } from "../utils/logger";
 
 async function protectRoute (req: Request, res: Response, next: NextFunction): Promise<void>{
   try {
@@ -31,7 +32,7 @@ async function protectRoute (req: Request, res: Response, next: NextFunction): P
     next();
 
   } catch (err) {
-    console.log(err)
+    logger.error(err)
     res.status(401).json({
       status: "error",
       errorType: 'AuthError',

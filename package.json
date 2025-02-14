@@ -1,26 +1,26 @@
 {
-  "name": "imf-gadget-api",
+  "name": "node-user-service-api",
   "version": "1.0.0",
-  "description": "BD Intern Assignment for Upraised",
+  "description": "BD Intern Assignment",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b",
     "start:dev": "nodemon api/server.ts",
-    "start:prod": "npm run build && node dist/server.js"
+    "start:prod": "npm run build && node dist/server.js | jq"
   },
   "author": "Kaustav Tarafdar",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
