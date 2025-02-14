@@ -10,14 +10,9 @@ import { logger, loggerStream } from "./utils/logger";
 
 const app: Application = express();
 
-// Logging
 const morganFormat = ':method :url :status :res[content-length] - :response-time ms'
 app.use(morgan(morganFormat, { stream: loggerStream }));
-
-// Helmet
 app.use(helmet());
-
-// Middleware
 app.use(express.json());
 
 // Routes
