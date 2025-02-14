@@ -14,10 +14,6 @@ export interface IUserData {
 export class UserRepository {
     async createNewUser(userData: IUserData): Promise<IUser | null> {
         try {
-            if (!userData.username || !userData.email || !userData.password || !userData.gender || !userData.dateOfBirth || !userData.country) {
-                throw new Error("Missing required fields: username, email, password, gender, dateOfBirth, country");
-            }
-
             const newUser = new User(userData);
             return await newUser.save();
         } catch (error) {
@@ -26,12 +22,12 @@ export class UserRepository {
         }
     }
 
-    async checkUserCredentials(email: string, password: string): Promise<IUser | null> {
+    async checkUserCredentials(userData: IUserData): Promise<IUser | null> {
         try {
-            const user = await User.findOne({ email });
-            if (!user) return null;
+            const user = await User.findOne({email: userData.email});
 
-            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!user || !userData.password) return null;
+            const isPasswordValid = await bcrypt.compare(userData.password, user.password);
             return isPasswordValid ? user : null;
         } catch (error) {
             console.error("Error checking user credentials:", error);

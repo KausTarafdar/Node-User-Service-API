@@ -13,7 +13,17 @@ import helmet from "helmet";
 const app: Application = express();
 
 // Logging
-const logStream = fs.createWriteStream(path.join(__dirname, "..", "/logs", "access.log"), { flags: "a" });
+const getLogFileName = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const hour = String(now.getHours()).padStart(2, "0");
+
+  return `access_${year}-${month}-${day}_${hour}.log`;
+};
+
+const logStream = fs.createWriteStream(path.join(__dirname, "..", "/logs", getLogFileName()), { flags: "a" });
 app.use(morgan("combined", { stream: logStream }));
 
 // Helmet

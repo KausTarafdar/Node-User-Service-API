@@ -15,13 +15,10 @@ async function protectRoute (req: Request, res: Response, next: NextFunction): P
     }
 
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token!, process.env.JWT_SECRET!);
+    const decoded = jwt.verify(token!, process.env.JWT_SECRET as string);
 
-    const userData: IUserData = {
-        email: decoded as string,
-    }
-
-    const user = await new UserRepository().getUserProfileByEmailOrUsername(userData);
+    const { email } = decoded as { email: string };
+    const user = await new UserRepository().getUserProfileByEmailOrUsername({email: email});
     if (!user) {
       res.status(401).json({
         status: "error",
@@ -34,6 +31,7 @@ async function protectRoute (req: Request, res: Response, next: NextFunction): P
     next();
 
   } catch (err) {
+    console.log(err)
     res.status(401).json({
       status: "error",
       errorType: 'AuthError',

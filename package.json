@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b",
-    "start:dev": "npm run build && nodemon dist/server.js",
+    "start:dev": "nodemon api/server.ts",
     "start:prod": "npm run build && node dist/server.js"
   },
   "author": "Kaustav Tarafdar",
@@ -17,6 +17,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.0",
     "morgan": "^1.10.0"
@@ -27,11 +28,13 @@
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/helmet": "^4.0.0",
+    "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.8",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.13.2",
     "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }
